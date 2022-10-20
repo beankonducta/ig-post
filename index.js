@@ -19,7 +19,7 @@ const ig = new IgApiClient();
 ig.state.generateDevice(process.env.ig_username_personal)
 
 const dbx = new Dropbox.Dropbox({ accessToken: process.env.db_access_token })
-dbx.filesListFolder({path: ''}).then(res => console.log(res.status)).catch(err => console.log(err));
+dbx.filesListFolder({path: '/000000_BlueCopper'}).then(res => console.log(res.result)).catch(err => console.log(err));
 
 function randomBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
@@ -34,8 +34,11 @@ app.get('/login', function (req, res) {
 })
 
 app.get('/photos', function (req, res) {
-    dbx.filesListFolder({path: ''}).then(res => {
-        console.log(res);
+    dbx.filesListFolder({path: '/000000_BlueCopper'}).then(res => {
+        res.result.entries.forEach(val => {
+            console.log("ENTRY: ");
+            console.log(val);
+        })
         // get all photos
         // pick a random photo
         // pick a random caption ??
