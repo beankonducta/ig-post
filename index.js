@@ -6,7 +6,7 @@ import { IgCheckpointError } from 'instagram-private-api';
 import { promisify } from 'util'
 import { readFile } from 'fs';
 
-import  Dropbox  from 'dropbox';
+import Dropbox from 'dropbox';
 
 import express from 'express';
 const app = express()
@@ -25,8 +25,14 @@ function randomBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
+var loginAttempt = false
+
 app.get('/post', function (req, res) {
-    post().then(() => res.send('posted')).catch(() => res.send('error posting'))
+    login().then(() => {
+        post().then(() => res.send('posted')).catch(() => {
+            res.send('error posting')
+        })
+    }).catch(() => res.send("cant log in or post"))
 });
 
 app.get('/login', function (req, res) {
@@ -34,7 +40,7 @@ app.get('/login', function (req, res) {
 })
 
 app.get('/photos', function (req, res) {
-    dbx.filesListFolder({path: ''}).then(res => {
+    dbx.filesListFolder({ path: '' }).then(res => {
         console.log(res);
         // get all photos
         // pick a random photo
