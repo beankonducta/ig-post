@@ -25,40 +25,28 @@ function randomBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-app.get('/post-happy-hour', function (req, res) {
-    postHappyHour().then(() => res.send('posted')).catch(() => {
-        res.send('error posting')
-    })
+app.get('/post/happy-hour-story', function (req, res) {
+    postHappyHourStory().then(() => res.send('Successfully posted happy hour story.')).catch(() => res.send('Error posting happy hour story, maybe you need to login?')
+    )
 });
 
-app.get('/login', function (req, res) {
-    login().then(() => res.send("logged in")).catch(() => res.send('error logging in'))
+app.get('/post/hours-story', function (req, res) {
+    postHoursStory().then(() => res.send('Successfully posted hours story.')).catch(() => res.send('Error posting story, maybe you need to login?'))
 })
 
-// app.get('/photos', function (req, res) {
-//     dbx.filesListFolder({ path: '/000000_BlueCopper' }).then(res => {
-//         res.result.entries.forEach(val => {
-//             console.log("ENTRY: ");
-//             console.log(val);
-//         })
-//         // get all photos
-//         // pick a random photo
-//         // pick a random caption ??
-//         // post the photo and caption
-//         // mark the photo as used
+app.get('/login', function (req, res) {
+    login().then(() => res.send("Successfully logged in.")).catch(() => res.send('Error logging in.'))
+})
 
-//         // ALTERNATIVELY:
-
-//         // pick a random photo
-//         // post the photo with hours text over it (like grid city does)
-//     })
-// })
-
-async function postHappyHour() {
+async function postHappyHourStory() {
     const file = await readFileAsync(`./h_${randomBetween(0, 2)}.jpg`)
     await ig.publish.story({
         file
     })
+}
+
+async function postHoursStory() {
+    // TODO: build out method
 }
 
 async function login() {
