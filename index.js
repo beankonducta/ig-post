@@ -16,49 +16,45 @@ app.listen(3000)
 const readFileAsync = promisify(readFile);
 
 const ig = new IgApiClient();
-ig.state.generateDevice(process.env.ig_username_personal)
+ig.state.generateDevice(process.env.ig_username)
 
-const dbx = new Dropbox.Dropbox({ accessToken: process.env.db_access_token })
-dbx.filesListFolder({path: '/000000_BlueCopper'}).then(res => console.log(res.result)).catch(err => console.log(err));
+// const dbx = new Dropbox.Dropbox({ accessToken: process.env.db_access_token })
+// dbx.filesListFolder({path: '/000000_BlueCopper'}).then(res => console.log(res.result)).catch(err => console.log(err));
 
 function randomBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-var loginAttempt = false
-
-app.get('/post', function (req, res) {
-    login().then(() => {
-        post().then(() => res.send('posted')).catch(() => {
-            res.send('error posting')
-        })
-    }).catch(() => res.send("cant log in or post"))
+app.get('/post-happy-hour', function (req, res) {
+    postHappyHour().then(() => res.send('posted')).catch(() => {
+        res.send('error posting')
+    })
 });
 
 app.get('/login', function (req, res) {
     login().then(() => res.send("logged in")).catch(() => res.send('error logging in'))
 })
 
-app.get('/photos', function (req, res) {
-    dbx.filesListFolder({path: '/000000_BlueCopper'}).then(res => {
-        res.result.entries.forEach(val => {
-            console.log("ENTRY: ");
-            console.log(val);
-        })
-        // get all photos
-        // pick a random photo
-        // pick a random caption ??
-        // post the photo and caption
-        // mark the photo as used
+// app.get('/photos', function (req, res) {
+//     dbx.filesListFolder({ path: '/000000_BlueCopper' }).then(res => {
+//         res.result.entries.forEach(val => {
+//             console.log("ENTRY: ");
+//             console.log(val);
+//         })
+//         // get all photos
+//         // pick a random photo
+//         // pick a random caption ??
+//         // post the photo and caption
+//         // mark the photo as used
 
-        // ALTERNATIVELY:
+//         // ALTERNATIVELY:
 
-        // pick a random photo
-        // post the photo with hours text over it (like grid city does)
-    })
-})
+//         // pick a random photo
+//         // post the photo with hours text over it (like grid city does)
+//     })
+// })
 
-async function post() {
+async function postHappyHour() {
     const file = await readFileAsync(`./h_${randomBetween(0, 2)}.jpg`)
     await ig.publish.story({
         file
@@ -66,5 +62,5 @@ async function post() {
 }
 
 async function login() {
-    await ig.account.login(process.env.ig_username_personal, process.env.ig_password_personal)
+    await ig.account.login(process.env.ig_username, process.env.ig_password)
 }
