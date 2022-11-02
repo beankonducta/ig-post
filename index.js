@@ -42,7 +42,7 @@ app.get('/post/hours-story', function (req, res) {
 })
 
 app.get('/login', function (req, res) {
-    login().then(() => res.send("Successfully logged in.")).catch(() => res.send('Error logging in.'))
+    login().then(() => res.send("Successfully logged in.")).catch((err) => res.send(JSON.stringify(err)))
 })
 
 async function postHappyHourStory() {
