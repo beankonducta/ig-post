@@ -4,7 +4,7 @@ dotenv.config()
 import { IgApiClient } from 'instagram-private-api';
 import { IgCheckpointError } from 'instagram-private-api';
 import { promisify } from 'util'
-import { readFile } from 'fs';
+import { readFile, readdir, fstat } from 'fs';
 
 import Dropbox from 'dropbox';
 
@@ -36,6 +36,12 @@ app.get('/post/hours-story', function (req, res) {
 
 app.get('/login', function (req, res) {
     login().then(() => res.send("Successfully logged in.")).catch(() => res.send('Error logging in.'))
+})
+
+app.get('/files', function( req, res) {
+    readdir('./images', (err, files) => {
+        res.send(JSON.stringify(files))
+    })
 })
 
 async function postHappyHourStory() {
