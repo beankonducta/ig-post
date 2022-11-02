@@ -31,8 +31,11 @@ app.get('/test', function (req, res) {
 });
 
 app.get('/post/happy-hour-story', function (req, res) {
-    postHappyHourStory().then(() => res.send('Successfully posted happy hour story.')).catch(() => res.send('Error posting happy hour story, maybe you need to login?')
-    )
+    const dayOfWeek = new Date().getDay();
+    const isWeekend = (dayOfWeek === 6) || (dayOfWeek === 0);
+    if (!isWeekend)
+        postHappyHourStory().then(() => res.send('Successfully posted happy hour story.')).catch(() => res.send('Error posting happy hour story, maybe you need to login?')
+        )
 });
 
 app.get('/post/hours-story', function (req, res) {
