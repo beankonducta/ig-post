@@ -2,11 +2,10 @@ import * as dotenv from 'dotenv';
 dotenv.config()
 
 import { IgApiClient } from 'instagram-private-api';
-import { IgCheckpointError } from 'instagram-private-api';
 import { promisify } from 'util'
-import { readFile, readdirSync } from 'fs';
+import { readFile, readdir, unlink } from 'fs';
 
-import Dropbox from 'dropbox';
+import Jimp from 'jimp';
 
 import express from 'express';
 const app = express()
@@ -14,12 +13,12 @@ const app = express()
 app.listen(3000)
 
 const readFileAsync = promisify(readFile);
+const readdirAsync = promisify(readdir);
+const unlinkAsync = promisify(unlink);
 
+// init IG instance
 const ig = new IgApiClient();
-ig.state.generateDevice(process.env.ig_username)
-
-// const dbx = new Dropbox.Dropbox({ accessToken: process.env.db_access_token })
-// dbx.filesListFolder({path: '/000000_BlueCopper'}).then(res => console.log(res.result)).catch(err => console.log(err));
+ig.state.generateDevice(process.env.ig_username_personal)
 
 function randomBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
@@ -31,32 +30,52 @@ app.get('/post/happy-hour-story', function (req, res) {
 });
 
 app.get('/post/hours-story', function (req, res) {
-    postHoursStory().then(() => res.send('Successfully posted hours story.')).catch(() => res.send('Error posting story, maybe you need to login?'))
+    const dayOfWeek = new Date().getDay();
+    const isWeekend = (dayOfWeek === 6) || (dayOfWeek === 0);
+    postHoursStory((isWeekend ? '9a - 4p' : '8a - 3p'), (isWeekend ? '8a - 3p' : '7a - 2p')).then(() => res.send('Successfully posted hours story.')).catch(() => res.send('Error posting story, maybe you need to login?'))
 })
 
 app.get('/login', function (req, res) {
     login().then(() => res.send("Successfully logged in.")).catch(() => res.send('Error logging in.'))
 })
 
-app.get('/files', function( req, res) {
-    readdir('./images', (err, files) => {
-        res.send(JSON.stringify(files))
-    })
-})
-
 async function postHappyHourStory() {
-    const files = readdirSync(`./img/hh`)
-    const file = await readFileAsync(files[Math.floor(Math.random() * files.length)])
-    console.log(file)
-    // await ig.publish.story({
-    //     file
-    // })
+    const dir = './img/hh'
+    try {
+        const files = await readdirAsync(dir)
+        const file = await readFileAsync(`${dir}/${files[randomBetween(0, files.length - 1)]}`)
+        await ig.publish.story({
+            file
+        })
+    } catch (err) {
+        // logger? 
+        console.log(err);
+    }
 }
 
-async function postHoursStory() {
-    // TODO: build out method
+async function postHoursStory(bccrHours, bc2kHours) {
+    const dir = './img/dbx'
+    try {
+        const files = await readdirAsync(dir)
+        const index = randomBetween(0, files.length - 1)
+        const image = await Jimp.read(`${dir}/${files[index]}`)
+        const font = await Jimp.loadFont('./fnt/futura-yellow.fnt')
+        const font1 = await Jimp.loadFont('./fnt/futura-pink.fnt')
+        image.print(font, 10, 10, 'Hours Today:')
+        image.print(font, 10, 110, `BCCR: ${bccrHours}`)
+        image.print(font1, 10, 210, `BC2K: ${bc2kHours}`)
+        await image.writeAsync(`${dir}/0_${files[index]}`)
+        const file = await readFileAsync(`${dir}/0_${files[index]}`)
+        await unlinkAsync(`${dir}/0_${files[index]}`)
+        await ig.publish.story({
+            file
+        })
+    } catch (err) {
+        // logger? 
+        console.log(err);
+    }
 }
 
 async function login() {
-    await ig.account.login(process.env.ig_username, process.env.ig_password)
+    await ig.account.login(process.env.ig_username_personal, process.env.ig_password_personal)
 }
