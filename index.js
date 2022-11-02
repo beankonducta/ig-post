@@ -10,7 +10,9 @@ import Jimp from 'jimp';
 import express from 'express';
 const app = express()
 
-app.listen(3000)
+app.listen(3000, () => {
+    console.log('Server started on port 3000!')
+})
 
 const readFileAsync = promisify(readFile);
 const readdirAsync = promisify(readdir);
