@@ -20,7 +20,7 @@ const unlinkAsync = promisify(unlink);
 
 // init IG instance
 const ig = new IgApiClient();
-ig.state.generateDevice(process.env.ig_username_personal)
+ig.state.generateDevice(process.env.ig_username)
 
 function randomBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
@@ -93,5 +93,5 @@ async function postHoursStory(bccrHours, bc2kHours) {
 }
 
 async function login() {
-    await ig.account.login(process.env.ig_username_personal, process.env.ig_password_personal)
+    await ig.account.login(process.env.ig_username, process.env.ig_password)
 }
