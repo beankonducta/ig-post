@@ -26,6 +26,10 @@ function randomBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
+app.get('/test', function (req, res) {
+    res.send("I am alive!");
+});
+
 app.get('/post/happy-hour-story', function (req, res) {
     postHappyHourStory().then(() => res.send('Successfully posted happy hour story.')).catch(() => res.send('Error posting happy hour story, maybe you need to login?')
     )
