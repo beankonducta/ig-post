@@ -4,7 +4,7 @@ dotenv.config()
 import { IgApiClient } from 'instagram-private-api';
 import { IgCheckpointError } from 'instagram-private-api';
 import { promisify } from 'util'
-import { readFile, readdir, fstat } from 'fs';
+import { readFile, readdirSync } from 'fs';
 
 import Dropbox from 'dropbox';
 
@@ -45,10 +45,12 @@ app.get('/files', function( req, res) {
 })
 
 async function postHappyHourStory() {
-    const file = await readFileAsync(`./h_${randomBetween(0, 2)}.jpg`)
-    await ig.publish.story({
-        file
-    })
+    const files = readdirSync(`./img/hh`)
+    const file = await readFileAsync(files[Math.floor(Math.random() * files.length)])
+    console.log(file)
+    // await ig.publish.story({
+    //     file
+    // })
 }
 
 async function postHoursStory() {
