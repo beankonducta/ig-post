@@ -30,6 +30,13 @@ app.get('/test', function (req, res) {
     res.send("I am alive!");
 });
 
+app.get('/dbx-test', async function (req, res) {
+    const dir = './img/dbx'
+    const files = await readdirAsync(dir)
+    const index = randomBetween(0, files.length - 1)
+    res.send(`${dir}/0_${files[index]}`)
+})
+
 app.get('/post/happy-hour-story', function (req, res) {
     const dayOfWeek = new Date().getDay();
     const isWeekend = (dayOfWeek === 6) || (dayOfWeek === 0);
