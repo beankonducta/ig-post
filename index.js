@@ -6,7 +6,7 @@ import { IgCheckpointError } from 'instagram-private-api';
 import { promisify } from 'util'
 import { readFile } from 'fs';
 
-import  Dropbox  from 'dropbox';
+import Dropbox from 'dropbox';
 
 import express from 'express';
 const app = express()
@@ -26,7 +26,13 @@ function randomBetween(min, max) {
 }
 
 app.get('/post', function (req, res) {
-    post().then(() => res.send('posted')).catch(() => res.send('error posting'))
+    // logging in before posting each time could be a solution or a problem *shrug*
+    // it seems like it could possibly be causing my IG account on phone to get kicked out
+    login().then(() => {
+        post().then(() => res.send('posted')).catch(() => {
+            res.send('error posting')
+        })
+    }).catch(() => res.send("cant log in or post"))
 });
 
 app.get('/login', function (req, res) {
@@ -34,11 +40,14 @@ app.get('/login', function (req, res) {
 })
 
 app.get('/photos', function (req, res) {
-    dbx.filesListFolder({path: '/000000_BlueCopper'}).then(res => {
-        res.result.entries.forEach(val => {
+    dbx.media({path: '/000000_BlueCopper'}).then(r => {
+        r.result.entries.forEach(val => {
             console.log("ENTRY: ");
             console.log(val);
         })
+        res.send(""+r.result.entries.length)
+        const len = r.result.entries.length;
+        const ran = randomBetween(0, len -1);
         // get all photos
         // pick a random photo
         // pick a random caption ??
@@ -55,7 +64,8 @@ app.get('/photos', function (req, res) {
 async function post() {
     const file = await readFileAsync(`./h_${randomBetween(0, 2)}.jpg`)
     await ig.publish.story({
-        file
+        file,
+        caption: "this is a test"
     })
 }
 
