@@ -15,6 +15,11 @@ const app = express()
 let run = true;
 let timeTilRun = 0;
 
+let totalLikes = 0;
+
+// auth object, might need later
+let auth;
+
 app.listen(3000, () => {
     console.log('Server started on port 3000!')
 })
@@ -26,6 +31,8 @@ const unlinkAsync = promisify(unlink);
 // init IG instance
 const ig = new IgApiClient();
 ig.state.generateDevice(process.env.ig_username)
+
+const delay = ms => new Promise(res => setTimeout(res, ms))
 
 function randomBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
@@ -48,9 +55,21 @@ setInterval(tick, 1000 * 60 * 15);
 * TEST HERE
 */
 
-app.get('/test', function (req, res) {
+app.get('/test', async function (req, res) {
     res.send("I am alive!");
 });
+
+app.get('/test/delay', async function (req, res) {
+    f.forEach(() => {
+        console.log("test");
+        delay(randomBetween(1000, 5000))
+    })
+
+});
+
+app._router.get('/test/total-likes', async function (req, res) {
+    res.send(`Total likes since boot: ${totalLikes}`)
+})
 
 app.get('/dbx-test', async function (req, res) {
     const dir = './img/dbx'
@@ -128,6 +147,27 @@ app.get('/login', function (req, res) {
         login().then(() => res.send("Successfully logged in.")).catch((err) => res.send(JSON.stringify(err)))
 })
 
+app.get('/like/tag', function (req, res) {
+    const q = req.query.tag;
+    const min = req.query.min;
+    const max = req.query.max;
+    if (!q || q === "") {
+        res.send("Must supply a tag in query. Hint: ?tag=something")
+        return;
+    }
+    if (run) {
+        searchByTag(q).then(async (r) => {
+            res.send(`Successfully searched for ${q}.`)
+            for (let i = 0; i < r.items.length - 1; i++) {
+                await delay(randomBetween(+min, +max));
+                likePost(r.items[i].id)
+                totalLikes ++;
+                console.log(`Liked post: ${r.items[i].id} - by @${r.items[i].user.full_name} - with ${r.items[i].like_count} likes.`)
+            }
+        }).catch(() => res.send("Error posting -- do you need to log in?"))
+    }
+})
+
 async function postHappyHourStory(res) {
     const dir = './img/hh'
     try {
@@ -151,15 +191,17 @@ async function postHoursStory(bccrHours, bc2kHours, res) {
         const image = await Jimp.read(`${dir}/${files[index]}`)
         const font = await Jimp.loadFont('./fnt/futura-yellow.fnt')
         const font1 = await Jimp.loadFont('./fnt/futura-pink.fnt')
+        console.log(`index: ${index}`)
+        console.log(`file: ${files[index]}`)
         image.print(font, 10, 10, 'Hours Today:')
         image.print(font, 10, 110, `BCCR: ${bccrHours}`)
         image.print(font1, 10, 210, `BC2K: ${bc2kHours}`)
         await image.writeAsync(`${dir}/0_${files[index]}`)
         const file = await readFileAsync(`${dir}/0_${files[index]}`)
         await unlinkAsync(`${dir}/0_${files[index]}`)
-        await ig.publish.story({
-            file
-        })
+        // await ig.publish.story({
+        //     file
+        // })
     } catch (err) {
         // logger? 
         console.log(err);
@@ -195,5 +237,21 @@ async function postCustomStory(caption, res) {
 }
 
 async function login() {
-    await ig.account.login(process.env.ig_username, process.env.ig_password)
+    auth = await ig.account.login(process.env.ig_username, process.env.ig_password);
+}
+
+async function searchByTag(query) {
+    return await ig.feed.tag(query).request();
+}
+
+async function likePost(postId) {
+    await ig.media.like({
+        mediaId: postId,
+        moduleInfo: {
+            module_name: 'profile',
+            user_id: auth.pk,
+            username: process.env.ig_username,
+        },
+        d: 1
+    })
 }
