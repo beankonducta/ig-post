@@ -199,9 +199,9 @@ async function postHoursStory(bccrHours, bc2kHours, res) {
         await image.writeAsync(`${dir}/0_${files[index]}`)
         const file = await readFileAsync(`${dir}/0_${files[index]}`)
         await unlinkAsync(`${dir}/0_${files[index]}`)
-        // await ig.publish.story({
-        //     file
-        // })
+        await ig.publish.story({
+            file
+        })
     } catch (err) {
         // logger? 
         console.log(err);
