@@ -2,73 +2,198 @@ import * as dotenv from 'dotenv';
 dotenv.config()
 
 import { IgApiClient } from 'instagram-private-api';
-import { IgCheckpointError } from 'instagram-private-api';
 import { promisify } from 'util'
-import { readFile } from 'fs';
+import { readFile, readdir, unlink } from 'fs';
 
-import Dropbox from 'dropbox';
+import Jimp from 'jimp';
 
 import express from 'express';
+import { resolveSoa } from 'dns';
 const app = express()
 
-app.listen(3000)
+// flag to skip posting if we hit the /stop endpoint
+let run = true;
+let timeTilRun = 0;
+
+app.listen(3000, () => {
+    console.log('Server started on port 3000!')
+})
 
 const readFileAsync = promisify(readFile);
+const readdirAsync = promisify(readdir);
+const unlinkAsync = promisify(unlink);
 
+// init IG instance
 const ig = new IgApiClient();
-ig.state.generateDevice(process.env.ig_username_personal)
-
-const dbx = new Dropbox.Dropbox({ accessToken: process.env.db_access_token })
-dbx.filesListFolder({path: '/000000_BlueCopper'}).then(res => console.log(res.result)).catch(err => console.log(err));
+ig.state.generateDevice(process.env.ig_username)
 
 function randomBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-app.get('/post', function (req, res) {
-    // logging in before posting each time could be a solution or a problem *shrug*
-    // it seems like it could possibly be causing my IG account on phone to get kicked out
-    login().then(() => {
-        post().then(() => res.send('posted')).catch(() => {
-            res.send('error posting')
-        })
-    }).catch(() => res.send("cant log in or post"))
+function tick() {
+    if (timeTilRun > 0)
+        timeTilRun -= 1000 * 60 * 15 // 15 mins
+    if (timeTilRun <= 0) {
+        timeTilRun = 0 // reset to 0
+        run = true
+    }
+
+}
+
+// every 15 mins, check timer
+setInterval(tick, 1000 * 60 * 15);
+
+/*
+* TEST HERE
+*/
+
+app.get('/test', function (req, res) {
+    res.send("I am alive!");
 });
 
+app.get('/dbx-test', async function (req, res) {
+    const dir = './img/dbx'
+    const files = await readdirAsync(dir)
+    const index = randomBetween(0, files.length - 1)
+    res.send(`${dir}/0_${files[index]}`)
+})
+
+app.get('/time-til-run', async function (req, res) {
+    if (timeTilRun > 0)
+        if (!req.query.ms)
+            res.send(`Hours til pause ends: ${timeTilRun / 1000 / 60 / 60}`)
+        else
+            res.send(`Ms til pause ends: ${timeTilRun}`)
+    else res.send('Currently running!')
+})
+
+/*
+* END TESTS
+*/
+
+app.get('/pause', async function (req, res) {
+    // duration, in hours to pause
+    const duration = req.query.duration
+    if (isNaN(duration)) {
+        res.send("Invalid duration! That's not a number. Hint: ?duration=1")
+        return;
+    }
+    if (duration < 0) {
+        res.send("Duration must be greater than 0!")
+        return;
+    }
+    timeTilRun = +duration * 3600000 // convert provided hours to ms
+    run = false;
+    res.send(`Pausing for ${duration} hours.`)
+})
+
+app.get('/resume', async function (req, res) {
+    timeTilRun = 0;
+    run = true;
+    res.send("Resuming regular operations.")
+})
+
+app.get('/post/story/happy-hour', function (req, res) {
+    const dayOfWeek = new Date().getDay();
+    const isWeekend = (dayOfWeek === 6) || (dayOfWeek === 0);
+    if (!isWeekend && run)
+        postHappyHourStory(res).then(() => res.send('Successfully posted happy hour story.')).catch(() => res.send("Error posting -- do you need to log in?"))
+});
+
+app.get('/post/story/hours', function (req, res) {
+    const dayOfWeek = new Date().getDay();
+    const isWeekend = (dayOfWeek === 6) || (dayOfWeek === 0);
+    if (run)
+        postHoursStory((isWeekend ? '9a - 4p' : '8a - 3p'), (isWeekend ? '8a - 3p' : '7a - 2p'), res).then(() => res.send('Successfully posted hours story.')).catch(() => res.send("Error posting -- do you need to log in?"))
+})
+
+app.get('/post/story/custom', function (req, res) {
+    const caption = req.query.caption;
+    const ignorePause = req.query.ignorePause;
+    if (!caption) {
+        res.send("Caption required! Hint: ?caption=this is a caption br this is the second line");
+        return;
+    }
+    if (caption.length > 200) { // dunno if this is the right number, just random
+        res.send("Caption too long! Max of 200 chars.");
+        return;
+    }
+    if (run || ignorePause)
+        postCustomStory(caption).then(() => res.send("Successfully posted custom story.")).catch(() => res.send("Error posting -- do you need to log in?"))
+})
+
 app.get('/login', function (req, res) {
-    login().then(() => res.send("logged in")).catch(() => res.send('error logging in'))
+    if (run)
+        login().then(() => res.send("Successfully logged in.")).catch((err) => res.send(JSON.stringify(err)))
 })
 
-app.get('/photos', function (req, res) {
-    dbx.media({path: '/000000_BlueCopper'}).then(r => {
-        r.result.entries.forEach(val => {
-            console.log("ENTRY: ");
-            console.log(val);
+async function postHappyHourStory(res) {
+    const dir = './img/hh'
+    try {
+        const files = await readdirAsync(dir)
+        const file = await readFileAsync(`${dir}/${files[randomBetween(0, files.length - 1)]}`)
+        await ig.publish.story({
+            file
         })
-        res.send(""+r.result.entries.length)
-        const len = r.result.entries.length;
-        const ran = randomBetween(0, len -1);
-        // get all photos
-        // pick a random photo
-        // pick a random caption ??
-        // post the photo and caption
-        // mark the photo as used
+    } catch (err) {
+        // logger? 
+        console.log(err);
+        res.send("Error posting -- do you need to log in?")
+    }
+}
 
-        // ALTERNATIVELY:
+async function postHoursStory(bccrHours, bc2kHours, res) {
+    const dir = './img/dbx'
+    try {
+        const files = await readdirAsync(dir)
+        const index = randomBetween(0, files.length - 1)
+        const image = await Jimp.read(`${dir}/${files[index]}`)
+        const font = await Jimp.loadFont('./fnt/futura-yellow.fnt')
+        const font1 = await Jimp.loadFont('./fnt/futura-pink.fnt')
+        image.print(font, 10, 10, 'Hours Today:')
+        image.print(font, 10, 110, `BCCR: ${bccrHours}`)
+        image.print(font1, 10, 210, `BC2K: ${bc2kHours}`)
+        await image.writeAsync(`${dir}/0_${files[index]}`)
+        const file = await readFileAsync(`${dir}/0_${files[index]}`)
+        await unlinkAsync(`${dir}/0_${files[index]}`)
+        await ig.publish.story({
+            file
+        })
+    } catch (err) {
+        // logger? 
+        console.log(err);
+        res.send("Error posting -- do you need to log in?")
+    }
+}
 
-        // pick a random photo
-        // post the photo with hours text over it (like grid city does)
-    })
-})
-
-async function post() {
-    const file = await readFileAsync(`./h_${randomBetween(0, 2)}.jpg`)
-    await ig.publish.story({
-        file,
-        caption: "this is a test"
-    })
+async function postCustomStory(caption, res) {
+    const dir = './img/dbx'
+    try {
+        const files = await readdirAsync(dir)
+        const index = randomBetween(0, files.length - 1)
+        const image = await Jimp.read(`${dir}/${files[index]}`)
+        const font = await Jimp.loadFont('./fnt/futura-yellow.fnt')
+        const font1 = await Jimp.loadFont('./fnt/futura-pink.fnt')
+        const ran = randomBetween(0, 1)
+        const split = caption.split(" br ");
+        split.forEach((line, index) => {
+            if (line !== " br ")
+                image.print((ran === 0 ? font : font1), 10, 10 + (index * 100), line)
+        })
+        await image.writeAsync(`${dir}/0_${files[index]}`)
+        const file = await readFileAsync(`${dir}/0_${files[index]}`)
+        await unlinkAsync(`${dir}/0_${files[index]}`)
+        await ig.publish.story({
+            file
+        })
+    } catch (err) {
+        // logger? 
+        console.log(err);
+        res.send("Error posting -- do you need to log in?")
+    }
 }
 
 async function login() {
-    await ig.account.login(process.env.ig_username_personal, process.env.ig_password_personal)
+    await ig.account.login(process.env.ig_username, process.env.ig_password)
 }
