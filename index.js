@@ -161,7 +161,7 @@ app.get('/like/tag', function (req, res) {
             for (let i = 0; i < r.items.length - 1; i++) {
                 await delay(randomBetween(+min, +max));
                 likePost(r.items[i].id)
-                totalLikes ++;
+                totalLikes++;
                 console.log(`Liked post: ${r.items[i].id} - by @${r.items[i].user.full_name} - with ${r.items[i].like_count} likes.`)
             }
         }).catch(() => res.send("Error posting -- do you need to log in?"))
@@ -211,6 +211,12 @@ async function postHoursStory(bccrHours, bc2kHours, res) {
 
 async function postCustomStory(caption, res) {
     const dir = './img/dbx'
+    const ranPost = randomBetween(0, 10)
+    if (ranPost < 4) {
+        res.send("Not posting -- random number was less than 4!"
+        )
+        return;
+    }
     try {
         const files = await readdirAsync(dir)
         const index = randomBetween(0, files.length - 1)
