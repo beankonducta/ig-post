@@ -185,6 +185,12 @@ async function postHappyHourStory(res) {
 
 async function postHoursStory(bccrHours, bc2kHours, res) {
     const dir = './img/dbx'
+    const ranPost = randomBetween(0, 10)
+    if (ranPost < 4) {
+        res.send("Not posting -- random number was less than 4!"
+        )
+        return;
+    }
     try {
         const files = await readdirAsync(dir)
         const index = randomBetween(0, files.length - 1)
@@ -193,9 +199,9 @@ async function postHoursStory(bccrHours, bc2kHours, res) {
         const font1 = await Jimp.loadFont('./fnt/futura-pink.fnt')
         console.log(`index: ${index}`)
         console.log(`file: ${files[index]}`)
-        image.print(font, 10, 10, 'Hours Today:')
-        image.print(font, 10, 110, `BCCR: ${bccrHours}`)
-        image.print(font1, 10, 210, `BC2K: ${bc2kHours}`)
+        image.print(font, 20, 10, 'Hours Today:')
+        image.print(font, 20, 110, `BCCR: ${bccrHours}`)
+        image.print(font1, 20, 210, `BC2K: ${bc2kHours}`)
         await image.writeAsync(`${dir}/0_${files[index]}`)
         const file = await readFileAsync(`${dir}/0_${files[index]}`)
         await unlinkAsync(`${dir}/0_${files[index]}`)
@@ -211,12 +217,6 @@ async function postHoursStory(bccrHours, bc2kHours, res) {
 
 async function postCustomStory(caption, res) {
     const dir = './img/dbx'
-    const ranPost = randomBetween(0, 10)
-    if (ranPost < 4) {
-        res.send("Not posting -- random number was less than 4!"
-        )
-        return;
-    }
     try {
         const files = await readdirAsync(dir)
         const index = randomBetween(0, files.length - 1)
