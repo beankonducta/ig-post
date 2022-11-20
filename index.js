@@ -3,13 +3,21 @@ dotenv.config()
 
 import { IgApiClient } from 'instagram-private-api';
 import { promisify } from 'util'
-import { readFile, readdir, unlink } from 'fs';
+import { readFile, readdir, unlink, appendFile } from 'fs';
 
 import Jimp from 'jimp';
 
 import express from 'express';
-import { resolveSoa } from 'dns';
 const app = express()
+
+// TODO:
+// I could have my payroll bot hit the /stop endpoint on holidays! EZ. Just need to host the server / expose it to the net
+
+// TODO:
+// Make hours poster more robust
+
+// TODO:
+// Add post liker to CRON
 
 // flag to skip posting if we hit the /stop endpoint
 let run = true;
@@ -27,6 +35,7 @@ app.listen(3000, () => {
 const readFileAsync = promisify(readFile);
 const readdirAsync = promisify(readdir);
 const unlinkAsync = promisify(unlink);
+const appendFileAsync = promisify(appendFile)
 
 // init IG instance
 const ig = new IgApiClient();
@@ -48,6 +57,10 @@ function tick() {
 
 }
 
+function log(message) {
+    appendFileAsync('log.txt', `\n ${new Date()} - ${message}`).then(() => { });
+}
+s
 // every 15 mins, check timer
 setInterval(tick, 1000 * 60 * 15);
 
@@ -61,10 +74,8 @@ app.get('/test', async function (req, res) {
 
 app.get('/test/delay', async function (req, res) {
     f.forEach(() => {
-        console.log("test");
         delay(randomBetween(1000, 5000))
     })
-
 });
 
 app._router.get('/test/total-likes', async function (req, res) {
@@ -104,12 +115,14 @@ app.get('/pause', async function (req, res) {
     }
     timeTilRun = +duration * 3600000 // convert provided hours to ms
     run = false;
+    log(`Pausing for ${duration} hours.`)
     res.send(`Pausing for ${duration} hours.`)
 })
 
 app.get('/resume', async function (req, res) {
     timeTilRun = 0;
     run = true;
+    log(`Resuming regular operations.`)
     res.send("Resuming regular operations.")
 })
 
@@ -117,14 +130,26 @@ app.get('/post/story/happy-hour', function (req, res) {
     const dayOfWeek = new Date().getDay();
     const isWeekend = (dayOfWeek === 6) || (dayOfWeek === 0);
     if (!isWeekend && run)
-        postHappyHourStory(res).then(() => res.send('Successfully posted happy hour story.')).catch(() => res.send("Error posting -- do you need to log in?"))
+        postHappyHourStory(res).then(() => {
+            log(`Successfully posted happy hour story.`)
+            res.send('Successfully posted happy hour story.')
+        }).catch(() => {
+            log(`Error posting happy hour story.`)
+            res.send("Error posting -- do you need to log in?")
+        })
 });
 
 app.get('/post/story/hours', function (req, res) {
     const dayOfWeek = new Date().getDay();
     const isWeekend = (dayOfWeek === 6) || (dayOfWeek === 0);
     if (run)
-        postHoursStory((isWeekend ? '9a - 4p' : '8a - 3p'), (isWeekend ? '8a - 3p' : '7a - 2p'), res).then(() => res.send('Successfully posted hours story.')).catch(() => res.send("Error posting -- do you need to log in?"))
+        postHoursStory((isWeekend ? '9a - 4p' : '8a - 3p'), (isWeekend ? '8a - 3p' : '7a - 2p'), res).then(() => {
+            log(`Successfully posted hours story.`)
+            res.send('Successfully posted hours story.')
+        }).catch(() => {
+            log(`Error post hours story.`)
+            res.send("Error posting -- do you need to log in?")
+        })
 })
 
 app.get('/post/story/custom', function (req, res) {
@@ -139,12 +164,24 @@ app.get('/post/story/custom', function (req, res) {
         return;
     }
     if (run || ignorePause)
-        postCustomStory(caption).then(() => res.send("Successfully posted custom story.")).catch(() => res.send("Error posting -- do you need to log in?"))
+        postCustomStory(caption).then(() => {
+            log(`successfully posted custom story.`)
+            res.send("Successfully posted custom story.")
+        }).catch(() => {
+            log(`Error posting custom story.`)
+            res.send("Error posting -- do you need to log in?")
+        })
 })
 
 app.get('/login', function (req, res) {
     if (run)
-        login().then(() => res.send("Successfully logged in.")).catch((err) => res.send(JSON.stringify(err)))
+        login().then(() => {
+            log(`Successfully logged in.`)
+            res.send("Successfully logged in.")
+        }).catch((err) => {
+            log(`Error logging in. Likely a challenge is needed.`)
+            res.send(JSON.stringify(err))
+        })
 })
 
 app.get('/like/tag', function (req, res) {
@@ -161,10 +198,13 @@ app.get('/like/tag', function (req, res) {
             for (let i = 0; i < r.items.length - 1; i++) {
                 await delay(randomBetween(+min, +max));
                 likePost(r.items[i].id)
-                totalLikes ++;
-                console.log(`Liked post: ${r.items[i].id} - by @${r.items[i].user.full_name} - with ${r.items[i].like_count} likes.`)
+                totalLikes++;
+                log(`Liked post: ${r.items[i].id} - by @${r.items[i].user.full_name} - with ${r.items[i].like_count} likes.`)
             }
-        }).catch(() => res.send("Error posting -- do you need to log in?"))
+        }).catch(() => {
+            log(`Error liking posts by tag ${q}.`)
+            res.send("Error liking posts -- do you need to log in?")
+        })
     }
 })
 
@@ -178,7 +218,7 @@ async function postHappyHourStory(res) {
         })
     } catch (err) {
         // logger? 
-        console.log(err);
+        log(`Error reading files to post happy hour story.`)
         res.send("Error posting -- do you need to log in?")
     }
 }
@@ -191,8 +231,10 @@ async function postHoursStory(bccrHours, bc2kHours, res) {
         const image = await Jimp.read(`${dir}/${files[index]}`)
         const font = await Jimp.loadFont('./fnt/futura-yellow.fnt')
         const font1 = await Jimp.loadFont('./fnt/futura-pink.fnt')
-        console.log(`index: ${index}`)
-        console.log(`file: ${files[index]}`)
+        const w = image.getWidth()
+        const h = image.getHeight()
+        log(`Hours story index: ${index}`)
+        log(`Hours story file: ${files[index]}`)
         image.print(font, 10, 10, 'Hours Today:')
         image.print(font, 10, 110, `BCCR: ${bccrHours}`)
         image.print(font1, 10, 210, `BC2K: ${bc2kHours}`)
@@ -203,8 +245,7 @@ async function postHoursStory(bccrHours, bc2kHours, res) {
             file
         })
     } catch (err) {
-        // logger? 
-        console.log(err);
+        log(`Error reading files to post hours story.`)
         res.send("Error posting -- do you need to log in?")
     }
 }
@@ -230,8 +271,7 @@ async function postCustomStory(caption, res) {
             file
         })
     } catch (err) {
-        // logger? 
-        console.log(err);
+        log(`Error reading files to post custom story.`)
         res.send("Error posting -- do you need to log in?")
     }
 }
