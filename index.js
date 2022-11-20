@@ -199,7 +199,11 @@ app.get('/like/tag', function (req, res) {
                 await delay(randomBetween(+min, +max));
                 likePost(r.items[i].id)
                 totalLikes++;
+<<<<<<< HEAD
                 log(`Liked post: ${r.items[i].id} - by @${r.items[i].user.full_name} - with ${r.items[i].like_count} likes.`)
+=======
+                console.log(`Liked post: ${r.items[i].id} - by @${r.items[i].user.full_name} - with ${r.items[i].like_count} likes.`)
+>>>>>>> 2f58b7647045b603c8abb0da428ad82f17364340
             }
         }).catch(() => {
             log(`Error liking posts by tag ${q}.`)
@@ -225,12 +229,19 @@ async function postHappyHourStory(res) {
 
 async function postHoursStory(bccrHours, bc2kHours, res) {
     const dir = './img/dbx'
+    const ranPost = randomBetween(0, 10)
+    if (ranPost < 4) {
+        res.send("Not posting -- random number was less than 4!"
+        )
+        return;
+    }
     try {
         const files = await readdirAsync(dir)
         const index = randomBetween(0, files.length - 1)
         const image = await Jimp.read(`${dir}/${files[index]}`)
         const font = await Jimp.loadFont('./fnt/futura-yellow.fnt')
         const font1 = await Jimp.loadFont('./fnt/futura-pink.fnt')
+<<<<<<< HEAD
         const w = image.getWidth()
         const h = image.getHeight()
         log(`Hours story index: ${index}`)
@@ -238,6 +249,13 @@ async function postHoursStory(bccrHours, bc2kHours, res) {
         image.print(font, 10, 10, 'Hours Today:')
         image.print(font, 10, 110, `BCCR: ${bccrHours}`)
         image.print(font1, 10, 210, `BC2K: ${bc2kHours}`)
+=======
+        console.log(`index: ${index}`)
+        console.log(`file: ${files[index]}`)
+        image.print(font, 20, 10, 'Hours Today:')
+        image.print(font, 20, 110, `BCCR: ${bccrHours}`)
+        image.print(font1, 20, 210, `BC2K: ${bc2kHours}`)
+>>>>>>> 2f58b7647045b603c8abb0da428ad82f17364340
         await image.writeAsync(`${dir}/0_${files[index]}`)
         const file = await readFileAsync(`${dir}/0_${files[index]}`)
         await unlinkAsync(`${dir}/0_${files[index]}`)
