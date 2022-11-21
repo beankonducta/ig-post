@@ -36,3 +36,69 @@
  Mon Nov 21 2022 09:22:28 GMT-0700 (Mountain Standard Time) - Hours story index: 1
  Mon Nov 21 2022 09:22:28 GMT-0700 (Mountain Standard Time) - Hours story file: 5784D777-19E1-4D54-A2C9-835545EDF48A.jpeg
  Mon Nov 21 2022 09:22:40 GMT-0700 (Mountain Standard Time) - Successfully posted hours story.
+ Mon Nov 21 2022 09:32:52 GMT-0700 (Mountain Standard Time) - Error liking posts by tag thirdwavecoffee.
+ Mon Nov 21 2022 09:33:06 GMT-0700 (Mountain Standard Time) - Successfully logged in.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976515685735597299_4916412244 - by @Talking Crow Coffee Roasters | Specialty Decaf - with 0 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976514068303296853_30992464961 - by @SYMPOSIUM COFFEE ROASTERS - with 3 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976511529500584129_47828078727 - by @New Orleans Coffee Import Co. - with 5 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976510266636629094_54596363556 - by @Concept : Coffee - with 4 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976505620661911783_11338885 - by @Dr. Bean's Coffee Roasters - with 20 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976504573531057373_7393963226 - by @Armistice Coffee Roaster - with 3 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976500837934687369_483177559 - by @Yashika - with 25 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976499688619422077_15543568 - by @Mistobox Coffee - with 3 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976497953667248043_53646573379 - by @Cafe De Classico - with 1 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976496674793910840_3069395101 - by @Coma Coffee Roasters - with 8 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976494414273930048_7228028924 - by @Margin Coffee, Downtown & Santiam Hwy locations - with 9 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976491419598204228_1806110490 - by @Green Beans Coffee Company - with 4 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976491200127010037_12603048519 - by @RIDE FAST⚡️DRINK SLOW - with 34 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976486150904163815_53646573379 - by @Cafe De Classico - with 4 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976490714116008147_316207525 - by @YWAM Harpenden - with 40 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976487904025960626_45725477121 - by @Barista Bram On The Roat - with 18 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976485788611050907_45255837403 - by @LABROAST.COM - Specialty coffee & Tools - with 10 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976478087039732301_45015631585 - by @Unihub Coffee - with 18 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976474230124570519_4336517286 - by @My Coffee Abroad - with 5 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976469992988526467_28144833195 - by @SUEDHANG Kaffee - with 55 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976469262583157554_6038710795 - by @Mayflower - with 4 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976468500561901029_27271266238 - by @drei kaffeebar - with 57 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976466922514532436_48398115164 - by @Say Cheese🧀 - with 7 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976466749189951218_2249286031 - by @Hayman Coffee - with 3 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976462029782869907_1444451556 - by @田中 俊哉 - with 4 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976461756231408468_31495491681 - by @Specialty Coffee Experience - with 52 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976461453930714966_50289558515 - by @Sorbier Café - with 8 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976458408563181707_47418884010 - by @Sybaris Specialty Coffee - with 13 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976456755328143865_1444451556 - by @田中 俊哉 - with 2 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2976454392987360363_5668052120 - by @Hard Beans - with 41 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2975885332043276005_33947699220 - by @Procession Coffee - with 171 likes.
+ Mon Nov 21 2022 09:33:21 GMT-0700 (Mountain Standard Time) - Liked post: 2972288809963554006_33947699220 - by @Procession Coffee - with 202 likes.
+ Mon Nov 21 2022 09:35:31 GMT-0700 (Mountain Standard Time) - Liked post: 2976517140891343776_48889943257 - by @Asante Boutique Coffee Roaster - with 0 likes.
+ Mon Nov 21 2022 09:35:31 GMT-0700 (Mountain Standard Time) - Liked post: 2976514695541940723_43207392282 - by @Tushar Kapgate - with 0 likes.
+ Mon Nov 21 2022 09:35:32 GMT-0700 (Mountain Standard Time) - Liked post: 2976515685735597299_4916412244 - by @Talking Crow Coffee Roasters | Specialty Decaf - with 1 likes.
+ Mon Nov 21 2022 09:35:33 GMT-0700 (Mountain Standard Time) - Liked post: 2976514068303296853_30992464961 - by @SYMPOSIUM COFFEE ROASTERS - with 4 likes.
+ Mon Nov 21 2022 09:35:35 GMT-0700 (Mountain Standard Time) - Liked post: 2976511529500584129_47828078727 - by @New Orleans Coffee Import Co. - with 6 likes.
+ Mon Nov 21 2022 09:35:36 GMT-0700 (Mountain Standard Time) - Liked post: 2976510266636629094_54596363556 - by @Concept : Coffee - with 5 likes.
+ Mon Nov 21 2022 09:35:37 GMT-0700 (Mountain Standard Time) - Liked post: 2976505620661911783_11338885 - by @Dr. Bean's Coffee Roasters - with 21 likes.
+ Mon Nov 21 2022 09:35:37 GMT-0700 (Mountain Standard Time) - Liked post: 2976504573531057373_7393963226 - by @Armistice Coffee Roaster - with 5 likes.
+ Mon Nov 21 2022 09:35:39 GMT-0700 (Mountain Standard Time) - Liked post: 2976500837934687369_483177559 - by @Yashika - with 26 likes.
+ Mon Nov 21 2022 09:35:41 GMT-0700 (Mountain Standard Time) - Liked post: 2976499688619422077_15543568 - by @Mistobox Coffee - with 4 likes.
+ Mon Nov 21 2022 09:35:42 GMT-0700 (Mountain Standard Time) - Liked post: 2976497953667248043_53646573379 - by @Cafe De Classico - with 2 likes.
+ Mon Nov 21 2022 09:35:44 GMT-0700 (Mountain Standard Time) - Liked post: 2976496674793910840_3069395101 - by @Coma Coffee Roasters - with 9 likes.
+ Mon Nov 21 2022 09:35:44 GMT-0700 (Mountain Standard Time) - Liked post: 2976494414273930048_7228028924 - by @Margin Coffee, Downtown & Santiam Hwy locations - with 10 likes.
+ Mon Nov 21 2022 09:35:45 GMT-0700 (Mountain Standard Time) - Liked post: 2976491419598204228_1806110490 - by @Green Beans Coffee Company - with 5 likes.
+ Mon Nov 21 2022 09:35:46 GMT-0700 (Mountain Standard Time) - Liked post: 2976491200127010037_12603048519 - by @RIDE FAST⚡️DRINK SLOW - with 37 likes.
+ Mon Nov 21 2022 09:35:48 GMT-0700 (Mountain Standard Time) - Liked post: 2976486150904163815_53646573379 - by @Cafe De Classico - with 5 likes.
+ Mon Nov 21 2022 09:35:48 GMT-0700 (Mountain Standard Time) - Liked post: 2976490714116008147_316207525 - by @YWAM Harpenden - with 41 likes.
+ Mon Nov 21 2022 09:35:50 GMT-0700 (Mountain Standard Time) - Liked post: 2976487904025960626_45725477121 - by @Barista Bram On The Roat - with 19 likes.
+ Mon Nov 21 2022 09:35:50 GMT-0700 (Mountain Standard Time) - Liked post: 2976485788611050907_45255837403 - by @LABROAST.COM - Specialty coffee & Tools - with 11 likes.
+ Mon Nov 21 2022 09:35:52 GMT-0700 (Mountain Standard Time) - Liked post: 2976478087039732301_45015631585 - by @Unihub Coffee - with 19 likes.
+ Mon Nov 21 2022 09:35:52 GMT-0700 (Mountain Standard Time) - Liked post: 2976474230124570519_4336517286 - by @My Coffee Abroad - with 6 likes.
+ Mon Nov 21 2022 09:35:54 GMT-0700 (Mountain Standard Time) - Liked post: 2976469992988526467_28144833195 - by @SUEDHANG Kaffee - with 56 likes.
+ Mon Nov 21 2022 09:35:56 GMT-0700 (Mountain Standard Time) - Liked post: 2976469262583157554_6038710795 - by @Mayflower - with 5 likes.
+ Mon Nov 21 2022 09:35:57 GMT-0700 (Mountain Standard Time) - Liked post: 2976468500561901029_27271266238 - by @drei kaffeebar - with 59 likes.
+ Mon Nov 21 2022 09:35:58 GMT-0700 (Mountain Standard Time) - Liked post: 2976466922514532436_48398115164 - by @Say Cheese🧀 - with 8 likes.
+ Mon Nov 21 2022 09:35:59 GMT-0700 (Mountain Standard Time) - Liked post: 2976466749189951218_2249286031 - by @Hayman Coffee - with 3 likes.
+ Mon Nov 21 2022 09:36:00 GMT-0700 (Mountain Standard Time) - Liked post: 2976462029782869907_1444451556 - by @田中 俊哉 - with 5 likes.
+ Mon Nov 21 2022 09:36:01 GMT-0700 (Mountain Standard Time) - Liked post: 2976461756231408468_31495491681 - by @Specialty Coffee Experience - with 53 likes.
+ Mon Nov 21 2022 09:36:03 GMT-0700 (Mountain Standard Time) - Liked post: 2976461453930714966_50289558515 - by @Sorbier Café - with 9 likes.
+ Mon Nov 21 2022 09:36:03 GMT-0700 (Mountain Standard Time) - Liked post: 2975885332043276005_33947699220 - by @Procession Coffee - with 172 likes.
+ Mon Nov 21 2022 09:36:03 GMT-0700 (Mountain Standard Time) - Liked post: 2972288809963554006_33947699220 - by @Procession Coffee - with 203 likes.
+ Mon Nov 21 2022 09:36:04 GMT-0700 (Mountain Standard Time) - Liked post: 2968589615556397565_33947699220 - by @Procession Coffee - with 276 likes.
