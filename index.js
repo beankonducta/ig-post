@@ -147,7 +147,7 @@ app.get('/post/story/hours', function (req, res) {
             log(`Successfully posted hours story.`)
             res.send('Successfully posted hours story.')
         }).catch(() => {
-            log(`Error post hours story.`)
+            log(`Error posting hours story.`)
             res.send("Error posting -- do you need to log in?")
         })
 })
@@ -239,7 +239,6 @@ async function postHoursStory(bccrHours, bc2kHours, res) {
         const font1 = await Jimp.loadFont('./fnt/futura-pink.fnt')
         const w = image.getWidth()
         const h = image.getHeight()
-        // need to calculate the length of the string somehow
         const line1 = 'Hours Today:';
         const line2 = `BCCR: ${bccrHours}`;
         const line3 = `BC2K: ${bc2kHours}`;
