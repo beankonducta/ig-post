@@ -12,6 +12,7 @@ const app = express()
 
 // TODO:
 // I could have my payroll bot hit the /stop endpoint on holidays! EZ. Just need to host the server / expose it to the net
+// Or I could just copy that code over here lol
 
 // TODO:
 // Make hours poster more robust
