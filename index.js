@@ -209,7 +209,7 @@ app.get('/like/tag', function (req, res) {
     }
 })
 
-async function postHappyHourStory(res) {
+async function postHappyHourStory() {
     const dir = './img/hh'
     try {
         const files = await readdirAsync(dir)
@@ -220,11 +220,10 @@ async function postHappyHourStory(res) {
     } catch (err) {
         // logger? 
         log(`Error reading files to post happy hour story.`)
-        res.send("Error posting -- do you need to log in?")
     }
 }
 
-async function postHoursStory(bccrHours, bc2kHours, res) {
+async function postHoursStory(bccrHours, bc2kHours) {
     const dir = './img/dbx'
     const ranPost = randomBetween(0, 10)
     if (ranPost < 4) {
@@ -266,11 +265,10 @@ async function postHoursStory(bccrHours, bc2kHours, res) {
         })
     } catch (err) {
         log(`Error reading files to post hours story.`)
-        res.send("Error posting -- do you need to log in?")
     }
 }
 
-async function postCustomStory(caption, res) {
+async function postCustomStory(caption) {
     const dir = './img/dbx'
     try {
         const files = await readdirAsync(dir)
@@ -292,7 +290,6 @@ async function postCustomStory(caption, res) {
         })
     } catch (err) {
         log(`Error reading files to post custom story.`)
-        res.send("Error posting -- do you need to log in?")
     }
 }
 
