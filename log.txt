@@ -142,3 +142,36 @@
  Thu Dec 01 2022 14:41:09 GMT-0700 (Mountain Standard Time) - Error reading files to post hours story.
  Thu Dec 01 2022 14:41:09 GMT-0700 (Mountain Standard Time) - Successfully posted hours story.
  Thu Dec 01 2022 14:41:53 GMT-0700 (Mountain Standard Time) - Successfully posted happy hour story.
+ Thu Dec 01 2022 14:43:13 GMT-0700 (Mountain Standard Time) - Successfully logged in.
+ Thu Dec 01 2022 14:43:51 GMT-0700 (Mountain Standard Time) - Liked post: 2983919003291204346_48749354125 - by @Aqua e Polveri - with 1 likes.
+ Thu Dec 01 2022 14:43:52 GMT-0700 (Mountain Standard Time) - Liked post: 2983918212925264837_5642736960 - by @monkeycoffeecusco - with 0 likes.
+ Thu Dec 01 2022 14:43:53 GMT-0700 (Mountain Standard Time) - Liked post: 2983918167971711498_2126530873 - by @Be Specialty Coffee Roasters - with 1 likes.
+ Thu Dec 01 2022 14:43:54 GMT-0700 (Mountain Standard Time) - Liked post: 2983917832133796578_910872405 - by @Caffe Lusso Coffee Roasters - with 3 likes.
+ Thu Dec 01 2022 14:43:55 GMT-0700 (Mountain Standard Time) - Liked post: 2983916375450460134_1439332144 - by @𝙂𝙊𝙇𝙊𝙑𝙆𝙄𝙉𝘼𝙈𝘼𝙎𝙃𝘼 - with 5 likes.
+ Thu Dec 01 2022 14:43:57 GMT-0700 (Mountain Standard Time) - Liked post: 2983916358075236911_3511181105 - by @Kaffeerösterei Röstfreunde - with 2 likes.
+ Thu Dec 01 2022 14:43:58 GMT-0700 (Mountain Standard Time) - Liked post: 2983914684064436303_14456923 - by @Cory Belcher - with 1 likes.
+ Thu Dec 01 2022 14:43:59 GMT-0700 (Mountain Standard Time) - Liked post: 2983916191418132195_2325590658 - by @The King's Craft Coffee Co. - with 4 likes.
+ Thu Dec 01 2022 14:44:01 GMT-0700 (Mountain Standard Time) - Liked post: 2983916077646032367_47778653494 - by @Mike Ng - with 3 likes.
+ Thu Dec 01 2022 14:44:02 GMT-0700 (Mountain Standard Time) - Liked post: 2983915933748847366_48990488464 - by @Ramble on Roasting - Coffee - with 4 likes.
+ Thu Dec 01 2022 14:44:03 GMT-0700 (Mountain Standard Time) - Liked post: 2983915896206496635_42153514098 - by @𝐂𝐎𝐅𝐅𝐄𝐄 𝐒𝐎𝐔𝐑𝐂𝐄 - with 1 likes.
+ Thu Dec 01 2022 14:44:03 GMT-0700 (Mountain Standard Time) - Liked post: 2983915726018437249_42153514098 - by @𝐂𝐎𝐅𝐅𝐄𝐄 𝐒𝐎𝐔𝐑𝐂𝐄 - with 2 likes.
+ Thu Dec 01 2022 14:44:03 GMT-0700 (Mountain Standard Time) - Liked post: 2983915661545435051_5527715009 - by @Uroš Bertoncelj - with 3 likes.
+ Thu Dec 01 2022 14:44:05 GMT-0700 (Mountain Standard Time) - Liked post: 2983915509508338611_42153514098 - by @𝐂𝐎𝐅𝐅𝐄𝐄 𝐒𝐎𝐔𝐑𝐂𝐄 - with 1 likes.
+ Thu Dec 01 2022 14:44:05 GMT-0700 (Mountain Standard Time) - Liked post: 2983915344890259019_10454717 - by @Rashid Qahwah Espressobar - with 2 likes.
+ Thu Dec 01 2022 14:44:06 GMT-0700 (Mountain Standard Time) - Liked post: 2983914423602923982_52988950495 - by @Potblack - with 0 likes.
+ Thu Dec 01 2022 14:44:08 GMT-0700 (Mountain Standard Time) - Liked post: 2983914186484376319_5655058411 - by @Threadbare Coffee Consulting - with 1 likes.
+ Thu Dec 01 2022 14:44:08 GMT-0700 (Mountain Standard Time) - Liked post: 2983914056492377565_39948526202 - by @Concentrado de Café Cold Brew Infusionado Naturalmente - with 3 likes.
+ Thu Dec 01 2022 14:44:09 GMT-0700 (Mountain Standard Time) - Liked post: 2983914084336299339_40206348061 - by @deGregory's Fine Foods - with 3 likes.
+ Thu Dec 01 2022 14:44:10 GMT-0700 (Mountain Standard Time) - Liked post: 2983913892734334573_9719264946 - by @Mansfield Coffee Merchant - with 2 likes.
+ Thu Dec 01 2022 14:44:11 GMT-0700 (Mountain Standard Time) - Liked post: 2983913827654952497_6271099002 - by @Indigo Coffee Roasters - with 6 likes.
+ Thu Dec 01 2022 14:44:13 GMT-0700 (Mountain Standard Time) - Liked post: 2983913619525875563_51723688648 - by @Flip Flop Coffee Shop - with 3 likes.
+ Thu Dec 01 2022 14:44:14 GMT-0700 (Mountain Standard Time) - Liked post: 2983912096670778763_51626423056 - by @Blake Shaiper - with 4 likes.
+ Thu Dec 01 2022 14:44:15 GMT-0700 (Mountain Standard Time) - Liked post: 2983913278215833368_145866190 - by @PrAe ❤️ - with 5 likes.
+ Thu Dec 01 2022 14:44:16 GMT-0700 (Mountain Standard Time) - Liked post: 2983913024386685100_52774487363 - by @𝐁𝐫𝐞𝐚𝐤 Coffee & Drinks - with 4 likes.
+ Thu Dec 01 2022 14:44:17 GMT-0700 (Mountain Standard Time) - Liked post: 2983912425977086930_54593603842 - by @TROSE COFFEE - with 3 likes.
+ Thu Dec 01 2022 14:44:18 GMT-0700 (Mountain Standard Time) - Liked post: 2983911788265380406_48163943752 - by @Shields Coastal Coffee Company - with 7 likes.
+ Thu Dec 01 2022 14:44:19 GMT-0700 (Mountain Standard Time) - Liked post: 2983910863024793315_6645678295 - by @Merchant Coffee Roasters - with 3 likes.
+ Thu Dec 01 2022 14:44:19 GMT-0700 (Mountain Standard Time) - Liked post: 2983909504693060789_23408236361 - by @Casa Dos Chicas Café | Specialty Coffee - with 3 likes.
+ Thu Dec 01 2022 14:44:20 GMT-0700 (Mountain Standard Time) - Liked post: 2983909868624179279_44953280182 - by @Darren - with 11 likes.
+ Thu Dec 01 2022 14:44:20 GMT-0700 (Mountain Standard Time) - Liked post: 2983909857847489894_20542172730 - by @blacksailscoffee - with 5 likes.
+ Thu Dec 01 2022 14:44:22 GMT-0700 (Mountain Standard Time) - Liked post: 2983908757182728583_5446652684 - by @Nisamar Batista - with 0 likes.
