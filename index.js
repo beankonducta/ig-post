@@ -231,8 +231,8 @@ async function postHoursStory(bccrHours, bc2kHours) {
     const index = randomBetween(0, files.length - 1)
     const f = await sharp(`${dir}/${files[index]}`).resize(1400).composite([
         { input: './img/etc/hours.png' }
-    ]).toFile("test.jpg")
-    const file = await readFileAsync("test.jpg")
+    ]).toFile("./img/hours_output.jpg")
+    const file = await readFileAsync("./img/hours_output.jpg")
     await ig.publish.story({
         file
     })
