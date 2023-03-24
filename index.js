@@ -145,7 +145,7 @@ app.get('/post/story/hours', function (req, res) {
     const dayOfWeek = new Date().getDay();
     const isWeekend = (dayOfWeek === 6) || (dayOfWeek === 0);
     if (run)
-        postHoursStory((isWeekend ? '9a - 4p' : '8a - 3p'), (isWeekend ? '8a - 3p' : '7a - 2p'), res).then(() => {
+        postHoursStory(isWeekend).then(() => {
             log(`Successfully posted hours story.`)
             res.send('Successfully posted hours story.')
         }).catch(() => {
@@ -224,13 +224,13 @@ async function postHappyHourStory() {
     }
 }
 
-async function postHoursStory(bccrHours, bc2kHours) {
+async function postHoursStory(weekend) {
     // not using hours options currently
     const dir = './img/dbx'
     const files = await readdirAsync(dir)
     const index = randomBetween(0, files.length - 1)
     const f = await sharp(`${dir}/${files[index]}`).resize(1400).composite([
-        { input: './img/etc/hours.png' }
+        { input: `./img/etc/hours_${weekend? 'weekend' : 'weekday'}.png` }
     ]).toFile("./img/hours_output.jpg")
     const file = await readFileAsync("./img/hours_output.jpg")
     await ig.publish.story({
