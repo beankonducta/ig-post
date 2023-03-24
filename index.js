@@ -6,6 +6,7 @@ import { promisify } from 'util'
 import { readFile, readdir, unlink, appendFile } from 'fs';
 
 import Jimp from 'jimp';
+import sharp from 'sharp';
 
 import express from 'express';
 const app = express()
@@ -224,48 +225,17 @@ async function postHappyHourStory() {
 }
 
 async function postHoursStory(bccrHours, bc2kHours) {
+    // not using hours options currently
     const dir = './img/dbx'
-    const ranPost = randomBetween(0, 10)
-    if (ranPost < 4) {
-        res.send("Not posting -- random number was less than 4!"
-        )
-        return;
-    }
-    try {
-        const files = await readdirAsync(dir)
-        const index = randomBetween(0, files.length - 1)
-        const image = await Jimp.read(`${dir}/${files[index]}`)
-        const font = await Jimp.loadFont('./fnt/futura-yellow.fnt')
-        const font1 = await Jimp.loadFont('./fnt/futura-pink.fnt')
-        const w = image.getWidth()
-        const h = image.getHeight()
-        const line1 = 'Hours Today:';
-        const line2 = `BCCR: ${bccrHours}`;
-        const line3 = `BC2K: ${bc2kHours}`;
-        const line1len = Jimp.measureText(font, line1);
-        const line2len = Jimp.measureText(font, line2);
-        const line3len = Jimp.measureText(font, line3);
-        log(`Hours story index: ${index}`)
-        log(`Hours story file: ${files[index]}`)
-        const roll = randomBetween(0, 1);
-        if (roll === 1) {
-            image.print(font, 10, 10, line1)
-            image.print(font, 10, 110, line2)
-            image.print(font1, 10, 210, line3)
-        } else if(roll === 0) {
-            image.print(font, w / 2 - line1len - 10, 10, line1)
-            image.print(font, w / 2- line2len - 10, 110, line2)
-            image.print(font1, w / 2 - line3len - 10, 210, line3)
-        }
-        await image.writeAsync(`${dir}/0_${files[index]}`)
-        const file = await readFileAsync(`${dir}/0_${files[index]}`)
-        await unlinkAsync(`${dir}/0_${files[index]}`)
-        await ig.publish.story({
-            file
-        })
-    } catch (err) {
-        log(`Error reading files to post hours story.`)
-    }
+    const files = await readdirAsync(dir)
+    const index = randomBetween(0, files.length - 1)
+    const f = await sharp(`${dir}/${files[index]}`).resize(1400).composite([
+        { input: './img/etc/hours.png' }
+    ]).toFile("test.jpg")
+    const file = await readFileAsync("test.jpg")
+    await ig.publish.story({
+        file
+    })
 }
 
 async function postCustomStory(caption) {
