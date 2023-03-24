@@ -60,7 +60,8 @@ function tick() {
 }
 
 function log(message) {
-    appendFileAsync('log.txt', `\n ${new Date()} - ${message}`).then(() => { });
+    //appendFileAsync('log.txt', `\n ${new Date()} - ${message}`).then(() => { });
+    console.log(message)
 }
 
 // every 15 mins, check timer
